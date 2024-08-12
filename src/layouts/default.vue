@@ -18,5 +18,18 @@ import Header from '~/components/Header.vue'
 <style scoped>
 @import "~css/consts";
 
+.layout {
+  max-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex: 0 0 auto;
+}
+.main {
+  flex: 1 1 auto;
+}
 
 </style>

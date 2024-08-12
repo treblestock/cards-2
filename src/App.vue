@@ -6,11 +6,17 @@ import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <RouterView></RouterView>
+  <div class="app">
+    <RouterView></RouterView>
+  </div>
 </template>
 
 
 <style lang="pcss">
 @import '~css/null';
+
+.app {
+  max-height: 100vh;
+}
 
 </style>

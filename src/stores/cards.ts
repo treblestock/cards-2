@@ -10,14 +10,7 @@ const CARD_SET_LOCAL_STORAGE_PREFIX = 'cardSet_'
 
 export default defineStore('cardSets', {
   state: () => ({
-    // cardSets: {} as Record<string, CardSetData>
-    cardSets: {
-      nlc: {
-        '01': 'нокиа',
-        '02': 'нло',
-        '03': 'нитка',
-      }
-    } as Record<string, CardSetData>
+    cardSets: {} as Record<string, CardSetData>
   }),
   getters: {
     

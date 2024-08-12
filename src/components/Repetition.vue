@@ -31,15 +31,16 @@ const cardsStore = useStoreCards()
 const cardsAsKeyValuePairs = cardsStore.cardSets[props.cardSetName] || {}
 const cardsAsTuples: CardTuple[] = Object.entries(cardsAsKeyValuePairs)
 
-const cards = ref(shuffleArr(cardsAsTuples) )
+const cards = ref(shuffleArr(cardsAsTuples.filter(Boolean)) )
 
-const currentCards = computed<CardTuple[]>(() => [cards.value[0], cards.value[1]].filter(Boolean))
+const currentCards = computed<CardTuple[]>(() => [cards.value[0], cards.value[1]])
 // const currentCards = computed<CardTuple[]>(() => cards.value.filter(Boolean))
 
 
 function answerCorrect() {
   cards.value.shift()
   statsStore.incrementCorrectAnswerStats()
+
 }
 function answerWrong() {
   if (!cards.value.length) throw new Error(`
@@ -110,15 +111,16 @@ const cssBorder = computed<string>(() => {
 // pointer handling
 const topCardDragStartPosition = ref<null | number>(null)
 
-function onPointerDown(event: PointerEvent) {
-  topCardDragStartPosition.value = event.clientY
+function onPointerDown(event: TouchEvent) {
+  topCardDragStartPosition.value = event.touches[0].clientY
+  console.log(topCardDragStartPosition.value)
   const cardHTML = (event.target as HTMLElement).closest('.card') as HTMLElement
   cardHTML.classList.add('_with-shadow')
-  cardHTML.classList.toggle('_active')
+  cardHTML.classList.add('_active')
 }
-function onPoinetrMove(event: PointerEvent) {
+function onPoinetrMove(event: TouchEvent) {
   if (!topCardDragStartPosition.value) return
-  const offset = topCardDragStartPosition.value - event.clientY
+  const offset = topCardDragStartPosition.value - event.touches[0].clientY
   topCardOffset.value = offset
 }
 function onPointerUp(event: PointerEvent) {
@@ -128,6 +130,8 @@ function onPointerUp(event: PointerEvent) {
   if (topCardOffset.value <= -PX_DISTANCE_TO_SWIPE_CARD) {
     answerWrong()
   }
+  const cardHTML = (event.target as HTMLElement).closest('.card') as HTMLElement
+  cardHTML.classList.remove('_active')
   topCardDragStartPosition.value = null
   topCardOffset.value = 0
 }
@@ -142,9 +146,9 @@ function onPointerUp(event: PointerEvent) {
           v-for="[question, answer] in currentCards" :key="question" 
           :upside="question"
           :downside="answer"
-          @pointerdown="onPointerDown"
-          @pointermove="onPoinetrMove"
-          @pointerup="onPointerUp"
+          @touchstart="onPointerDown"
+          @touchmove="onPoinetrMove"
+          @touchend="onPointerUp"
         />
     </div>
   </div>
@@ -154,7 +158,7 @@ function onPointerUp(event: PointerEvent) {
 @import "~css/consts";
 
 .cards-iterator {
-  height: 100vh;
+  height: 90vh;
   width: 100%;
 
   display: flex;
