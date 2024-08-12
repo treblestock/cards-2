@@ -12,7 +12,9 @@ const routes = [
     path: BASE_URL,
     props: propsParser,
     component: DefaulLayout,
-    redirect: 'cardSetsList',
+    redirect: {
+      name: 'cardSetsList'
+    },
     children: [
       {
         path: 'cardSetsList',
