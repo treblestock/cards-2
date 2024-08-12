@@ -1,0 +1,82 @@
+- card set
+- task
+- avg stats
+
+
+
+----
+comp
+  header
+  card
+  cardInput
+  fixedControlls
+
+pages: 
+  SetList
+  CreateSet
+  task
+
+
+
+
+animations:
+page tr:
+  list -> task // lift top
+  task -> list // fall down
+  list -> createNew // lift top
+
+
+card
+  open
+  answer
+  isRequiredToRepeat highlight
+
+
+data:
+  type CardSet
+  type LearningStats
+  type LoadingStats
+  type RepetitionStats
+  // Card x Stats
+
+Logic
+  sort sets (if required to repeat show only this type, otherwise all)
+  Learinig Mode (Learn -> Repeat -> ...)
+  Card iter Logic
+  Stats
+  ?import logic
+
+
+user api:
+  create+cardSet:
+  edit+cardSet:
+  import+cardSet:
+  download+cardSet:
+  runRepetition+cardSet:
+  runLearning+cardSet:
+  answer+card:
+  showAnswer+card:
+
+
+
+metrics:
+  cards in set
+  revised Total
+  revised today
+  current card time
+  current card set time
+  avg card set time: cards / current card set time
+  accurance: (cards in set) / answers
+
+  cards remain to repeat: total cards - correctAnswers
+
+
+
+
+store:
+  CardSet: Card[]
+  RepeatStats<LearingStatus, CardSet>
+  LearningStats
+  LoadingStats
+  RepetitionStats
+

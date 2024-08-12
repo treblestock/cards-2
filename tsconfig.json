@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    "types": [
+      "./auto-imports",
+    ],
+
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"],
+      "~css/*": ["./src/assets/css/*"],
+      "~img/*": ["./src/assets/img/*"],
+      "~icons/*": ["./src/assets/img/icons/*"],
+    },
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["src/server/**/*.ts", "src/router/_types.ts", "src/**/ignore/**/*.ts", "src/**/ignore/**/*.vue"],
+}

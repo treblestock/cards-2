@@ -1,0 +1,28 @@
+@define-mixin addProp $name, $value, $sel: & {
+  $(sel) {
+    $(name): $value;
+  }
+}
+@define-mixin addVar $name, $value, $sel: html {
+  @mixin addProp $name, $value, html;
+}
+
+
+/* leng smooth */
+
+
+/* todo */
+@define-mixin leng-smooth $fz-min: 10px, $fz-max: 20px, $vp-min: 320px, $vp-max: 1440px {
+  $fz-delta: $fz-max - $fz-min;
+  $vp-delta: $vp-max - $vp-min;
+
+  html {
+    --fz-min: $fz-min;
+    --fz-max: $fz-max;
+    --vp-min: $vp-min;
+    --vp-max: $vp-max;
+  }
+  body > * {
+    /* font-size: clamp($fz-min, 12 * 2, $fz-max) */
+  }
+}
