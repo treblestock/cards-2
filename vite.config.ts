@@ -30,7 +30,7 @@ console.log(path.resolve(__dirname, 'src', 'assets', 'css', 'null'))
 // https://vitejs.dev/config/
 export default defineConfig(({mode}) => {
   return {
-    base: mode === 'development' ? '/' : '/createx-ecom-site/',
+    base: mode === 'development' ? '/' : '/cards-2/',
     resolve: {
       alias: {
         '~': path.resolve(__dirname, 'src'),
