@@ -12,10 +12,12 @@ const routes = [
     path: BASE_URL,
     props: propsParser,
     component: DefaulLayout,
-    redirect: BASE_URL + 'cardSetsList',
+    redirect: {
+      name: 'cardSetsList'
+    },
     children: [
       {
-        path: 'cardSetsList',
+        path: BASE_URL,
         name: 'cardSetsList',
         props: propsParser,
         component: () => import('~/pages/CardSetsList.vue'),
